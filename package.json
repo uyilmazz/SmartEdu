@@ -10,9 +10,20 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.1.2",
+    "slugify": "^1.6.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uyilmazz/smartEdu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uyilmazz/smartEdu/issues"
+  },
+  "homepage": "https://github.com/uyilmazz/smartEdu#readme",
+  "keywords": []
 }
