@@ -1,0 +1,13 @@
+
+
+
+<div class="widget-categories">
+    <h3 class="widget-title">Categories</h3>
+    <ul>
+
+        <% categories.forEach(category => { %>
+            <li><a href="/courses?categories=<%= category.slug%>"><%= category.name %> </a></li>
+        <% }) %>
+
+    </ul>
+</div>
