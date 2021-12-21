@@ -1,6 +1,8 @@
-const User = require("../models/User");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const User = require("../models/User");
+const Category = require('../models/Category');
+const Course = require('../models/Course');
 
 const createUser = async(req,res) =>{
     try{
@@ -28,7 +30,7 @@ const loginUser = async(req,res) => {
         if(user){
 
             const result = await bcrypt.compare(password,user.password);
-
+            
             if(result){
                 req.session.userID = user._id;
                 res.status(400).redirect('/users/dashboard');
@@ -60,9 +62,13 @@ const logoutUser = (req,res) =>{
 const getDashboardPage = async(req,res) => {
     try{
         const user = await User.findById(req.session.userID);
+        const categories = await Category.find();
+        const courses = await Course.find({user:req.session.userID}).sort('-createdAt');
         res.status(200).render('dashboard',{
             pageName:'dashboard',
-            user
+            user,
+            courses,
+            categories
         })
     }catch(err){
         res.json({
