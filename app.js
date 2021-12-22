@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -29,6 +31,20 @@ app.use(session({
     store: MongoStore.create({ mongoUrl: 'mongodb://localhost/smart-edu' }),
     resave: false,
     saveUninitialized: true,
+}));
+app.use(flash());
+app.use((req,res,next) => {
+    res.locals.validation_errors = req.flash('validation_error');
+    res.locals.success_message = req.flash('success_message');
+    res.locals.name = req.flash('name');
+    res.locals.email = req.flash('email');
+    res.locals.password = req.flash('password');
+    next();
+});
+app.use(methodOverride('_method',{
+    methods:[
+        'POST','GET'
+    ]
 }));
 
 //Routers

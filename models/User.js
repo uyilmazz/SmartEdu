@@ -21,11 +21,16 @@ const UserSchema = new Schema({
         type:String,
         enum:['student','teacher','admin'],
         default:'student'
-    }
+    },
+    courses:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Course'
+    }]
 
 },{collection:'Users',timestamps:true});
 
 UserSchema.pre('save',function(next){
+    if (!this.isModified('password')) return next();
     const user = this;
     bcrypt.hash(user.password,10,(err,hash) => {
         user.password = hash,
@@ -33,6 +38,6 @@ UserSchema.pre('save',function(next){
     });
 });
 
-const User = mongoose.model('Users',UserSchema);
+const User = mongoose.model('User',UserSchema);
 
 module.exports = User;

@@ -16,6 +16,10 @@
 	<% if (user.role === 'teacher') { %>
 		<%- include('partials/_teacher-dashboard.ejs') %> 
 	<% } %>
+
+	<% if (user.role === 'admin') { %>
+		<%- include('partials/_admin-dashboard.ejs') %> 
+	<% } %>
 	
     
 

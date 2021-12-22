@@ -5,15 +5,19 @@
 	        <div class="container">
             <div class="section-title text-center">
                 <h3 class="mt-5">LOGIN</h3>
+            
+            <% if (success_message != undefined || validation_errors != undefined) { %>
+                <%- include('partials/_mesaj.ejs') %> 
+            <% } %>
 
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12">
                     <div class="contact_form">
                         <div id="message"></div>
-                        <form action="users/login" method="POST">
+                        <form action="users/login" method="POST" novalidate>
                             <div class="row row-fluid">
                                 <div class="offset-1 col-lg-10 col-md-10 col-sm-10">
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                                    <input type="email" name="email" value="<%- typeof email != 'undefined' ? email : '' %>" id="email" class="form-control" placeholder="Email">
                                 </div>
                                 <div class="offset-1 col-lg-10 col-md-10 col-sm-10">
                                     <input type="password" name="password" id="password" class="form-control" placeholder="Password">
